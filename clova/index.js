@@ -77,6 +77,10 @@ class CEKRequest {
         const slots = this.request.intent.slots
 
         switch (intent) {
+            case 'searchIntent':
+                cekResponse.appendSpeechText('요청하신 주식을 검색할게요');
+                console.log(slots.valueOf());
+                break;
             case 'ThrowDiceIntent':
             default:
                 let diceCount = 1
@@ -89,6 +93,7 @@ class CEKRequest {
                 const throwResult = throwDice(diceCount)
                 cekResponse.appendSpeechText(resultText(throwResult))
                 break
+
         }
 
         if (this.session.new == false) {
