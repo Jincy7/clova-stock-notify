@@ -78,9 +78,13 @@ class CEKRequest {
 
         switch (intent) {
             case 'searchIntent':
+                let searchKey = "";
                 cekResponse.appendSpeechText('요청하신 주식을 검색할게요');
                 console.log(slots.valueOf()); // 예시 { StockNameSlot: { name: 'StockNameSlot', value: '네이버 주식' } }
-                const searchKey = slots.valueOf().value;
+                const searchKeySlot = slots.StockNameSlot;
+                if (slots.length != 0 && searchKeySlot) {
+                    searchKey = searchKeySlot.value;
+                }
                 console.log(searchKey);
                 /* TODO dev Blueprint
                 const stockResult = searchOnWeb(searchKey); 받은 주식값으로 검색 함수에 넣어서 값 반환 받기
