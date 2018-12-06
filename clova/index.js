@@ -98,11 +98,10 @@ class CEKRequest {
 
                         console.log('Request Success! Server responded with:', JSON.parse(body).stockID);
                         myResult = JSON.parse(body).stockID;
+                        let mySpeach = "요청하신 주식은" + myResult + "입니다.";
+                        console.log(mySpeach);
+                        cekResponse.appendSpeechText(mySpeach);
                     });
-
-                    let mySpeach = "요청하신 주식은" + myResult + "입니다.";
-                    console.log(mySpeach);
-                    cekResponse.appendSpeechText(mySpeach);
                 } else {
                     // 슬롯에 아무것도 없는 경우이므로 multiturn 응답을 통해 사용자에게 다시 회사명을 말해달라고 요청
                     // cekResponse.setSimpleSpeechText('죄송해요, 회사를 찾지 못했어요. 앞으로 서비스해 드리기 위해 회사명을 다시 한번만 말해주세요.')
