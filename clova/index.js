@@ -26,6 +26,19 @@ function resultText({midText, sum, diceCount}) {
     }
 }
 
+function getStock(stockName) {
+    return new Promise(function (resolve) {
+        request.post({url: stockSearchUrl, form: JSON.stringify({stockID: stockName})}, function (err, httpResponse, body) {
+            if (err) {
+                return console.error('Request failed:', err);
+            }
+            let result = JSON.parse(body).stockID;
+            console.log('Request Success! Server responded with:', result);
+            resolve(result);
+        });
+    });
+}
+
 function throwDice(diceCount) {
     const results = []
     let midText = ''
@@ -88,6 +101,7 @@ class CEKRequest {
                 const searchKeySlot = slots.StockNameSlot;
                 if (slots.length != 0 && searchKeySlot) {
                     searchKey = searchKeySlot.value;
+                    /*
                     request.post({
                         url: stockSearchUrl,
                         form: JSON.stringify({stockID: searchKey})
@@ -102,6 +116,10 @@ class CEKRequest {
                         console.log(mySpeach);
                         cekResponse.appendSpeechText(mySpeach);
                     });
+                    */
+                    getStock(searchKey).then(function(stockData){
+                        cekResponse.appendSpeechText("요청하신 주식은" + stockData+ "입니다.");
+                    });
                 } else {
                     // 슬롯에 아무것도 없는 경우이므로 multiturn 응답을 통해 사용자에게 다시 회사명을 말해달라고 요청
                     // cekResponse.setSimpleSpeechText('죄송해요, 회사를 찾지 못했어요. 앞으로 서비스해 드리기 위해 회사명을 다시 한번만 말해주세요.')
@@ -115,6 +133,8 @@ class CEKRequest {
                 결과 나오면 appendSpeechText 로 아래 resultText 처럼 함수 하나 만들어서 클로바로 출력하고
                 다이나모 디비에 저장!
 */
+                break;
+            case 'ResponseIntent':
                 break;
             case 'ThrowDiceIntent':
             default:

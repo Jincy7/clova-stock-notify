@@ -40,14 +40,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="1188" />
-          <entry key="txt" value="208" />
+          <entry key="js" value="1467" />
+          <entry key="txt" value="211" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="1188" />
-          <entry key="PLAIN_TEXT" value="208" />
+          <entry key="JavaScript" value="1467" />
+          <entry key="PLAIN_TEXT" value="211" />
         </counts>
       </usages-collector>
     </session>
@@ -80,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clova/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="102" column="57" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+            <state relative-caret-position="285">
+              <caret line="120" column="85" selection-start-line="120" selection-start-column="85" selection-end-line="120" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -130,8 +130,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1040" />
+    <option name="x" value="805" />
+    <option name="y" value="11" />
+    <option name="width" value="1113" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -166,7 +167,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../clova-stock-notify" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -196,7 +197,7 @@
       <workItem from="1541403828341" duration="4593000" />
       <workItem from="1543906830119" duration="8510000" />
       <workItem from="1544013089686" duration="854000" />
-      <workItem from="1544100201528" duration="2876000" />
+      <workItem from="1544100201528" duration="8637000" />
     </task>
     <task id="LOCAL-00001" summary="First customize.">
       <created>1541414211677</created>
@@ -247,11 +248,32 @@
       <option name="project" value="LOCAL" />
       <updated>1544106589833</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Request for Lambda function to search stock by search key - 3.">
+      <created>1544106724531</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1544106724531</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Request for Lambda function to search stock by search key - 4.">
+      <created>1544106921811</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1544106921811</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Request for Lambda function to search stock by search key - 5.">
+      <created>1544107064487</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1544107064487</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19983000" />
+    <option name="totallyTimeSpent" value="25744000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -263,10 +285,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1040" height="1047" extended-state="0" />
+    <frame x="805" y="11" width="1113" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21257485" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19813953" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -280,7 +302,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3125" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3125" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32894737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -301,7 +323,10 @@
     <MESSAGE value="Search key test-2." />
     <MESSAGE value="Request for Lambda function to search stock by search key." />
     <MESSAGE value="Request for Lambda function to search stock by search key - 2." />
-    <option name="LAST_COMMIT_MESSAGE" value="Request for Lambda function to search stock by search key - 2." />
+    <MESSAGE value="Request for Lambda function to search stock by search key - 3." />
+    <MESSAGE value="Request for Lambda function to search stock by search key - 4." />
+    <MESSAGE value="Request for Lambda function to search stock by search key - 5." />
+    <option name="LAST_COMMIT_MESSAGE" value="Request for Lambda function to search stock by search key - 5." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/config.js">
@@ -333,8 +358,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clova/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="102" column="57" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+        <state relative-caret-position="285">
+          <caret line="120" column="85" selection-start-line="120" selection-start-column="85" selection-end-line="120" selection-end-column="85" />
         </state>
       </provider>
     </entry>
