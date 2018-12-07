@@ -228,13 +228,18 @@ const clovaReq = function (httpReq, httpRes, next) {
     cekRequest = new CEKRequest(httpReq)
     cekRequest.do(cekResponse)
     if (myKey.length != 0) {
+        console.log(myKey);
         getStock(myKey).then(function (stockData) {
             cekResponse.appendSpeechText("요청하신 주식은" + stockData + "입니다.");
+            console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`)
+            return httpRes.send(cekResponse)
         });
+    }else{
+        console.log(myKey);
+        console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`)
+        return httpRes.send(cekResponse)
     }
-    console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`)
     myKey = "";
-    return httpRes.send(cekResponse)
 };
 
 module.exports = clovaReq;
