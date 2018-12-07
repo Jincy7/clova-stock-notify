@@ -5,6 +5,8 @@ const {DOMAIN} = require('../config');
 
 const stockSearchUrl = "https://7vudjag5n8.execute-api.ap-northeast-2.amazonaws.com/v1/stocks";
 
+let myKey = "";
+
 class Directive {
     constructor({namespace, name, payload}) {
         this.header = {
@@ -28,7 +30,10 @@ function resultText({midText, sum, diceCount}) {
 
 function getStock(stockName) {
     return new Promise(function (resolve) {
-        request.post({url: stockSearchUrl, form: JSON.stringify({stockID: stockName})}, function (err, httpResponse, body) {
+        request.post({
+            url: stockSearchUrl,
+            form: JSON.stringify({stockID: stockName})
+        }, function (err, httpResponse, body) {
             if (err) {
                 return console.error('Request failed:', err);
             }
@@ -101,6 +106,7 @@ class CEKRequest {
                 const searchKeySlot = slots.StockNameSlot;
                 if (slots.length != 0 && searchKeySlot) {
                     searchKey = searchKeySlot.value;
+                    myKey = searchKey;
                     /*
                     request.post({
                         url: stockSearchUrl,
@@ -117,14 +123,16 @@ class CEKRequest {
                         cekResponse.appendSpeechText(mySpeach);
                     });
                     */
-                    getStock(searchKey).then(function(stockData){
-                        cekResponse.appendSpeechText("요청하신 주식은" + stockData+ "입니다.");
+                    /*
+                    getStock(searchKey).then(function (stockData) {
+                        cekResponse.appendSpeechText("요청하신 주식은" + stockData + "입니다.");
                     });
+                    */
                 } else {
                     // 슬롯에 아무것도 없는 경우이므로 multiturn 응답을 통해 사용자에게 다시 회사명을 말해달라고 요청
                     // cekResponse.setSimpleSpeechText('죄송해요, 회사를 찾지 못했어요. 앞으로 서비스해 드리기 위해 회사명을 다시 한번만 말해주세요.')
                     // cekResponse.setMultiturn({
-                    //  intent: 'AddComapanyIntent',
+                    //  intent: 'AddCompanyIntent',
                     // });
                 }
                 console.log(searchKey);
@@ -219,7 +227,13 @@ const clovaReq = function (httpReq, httpRes, next) {
     cekResponse = new CEKResponse()
     cekRequest = new CEKRequest(httpReq)
     cekRequest.do(cekResponse)
+    if (myKey.length != 0) {
+        getStock(myKey).then(function (stockData) {
+            cekResponse.appendSpeechText("요청하신 주식은" + stockData + "입니다.");
+        });
+    }
     console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`)
+    myKey = "";
     return httpRes.send(cekResponse)
 };
 
