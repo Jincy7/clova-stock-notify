@@ -76,19 +76,20 @@ class CEKRequest {
                 return this.launchRequest(cekResponse);
             case 'IntentRequest':
                 return this.intentRequest(cekResponse);
-            case 'SessionEndedRequest':;
+            case 'SessionEndedRequest':
+                ;
                 return this.sessionEndedRequest(cekResponse)
         }
     }
 
     launchRequest(cekResponse) {
         console.log('launchRequest');
-        cekResponse.setSimpleSpeechText('안녕하세요. 경희대 최신기술 프로젝트 F조의 주식 알리미입니다.')
-        /*
-      cekResponse.setMultiturn({
-        intent: 'ThrowDiceIntent',
-      })
-      */
+        cekResponse.setSimpleSpeechText('안녕하세요. 경희대 최신기술 프로젝트 F조의 주식 알리미입니다.');
+        cekResponse.appendSpeechText('어떤 주식을 검색할까요?');
+        cekResponse.setMultiturn({
+            intent: 'searchIntent',
+        })
+
     }
 
     intentRequest(cekResponse) {
@@ -132,7 +133,7 @@ class CEKRequest {
                     // 슬롯에 아무것도 없는 경우이므로 multiturn 응답을 통해 사용자에게 다시 회사명을 말해달라고 요청
                     cekResponse.setSimpleSpeechText('죄송해요, 회사를 찾지 못했어요. 앞으로 서비스해 드리기 위해 회사명을 다시 한번만 말해주세요.')
                     cekResponse.setMultiturn({
-                     intent: 'AddCompanyIntent',
+                        intent: 'AddCompanyIntent',
                     });
                 }
                 console.log(searchKey);
@@ -167,7 +168,7 @@ class CEKRequest {
 
     sessionEndedRequest(cekResponse) {
         console.log('sessionEndedRequest');
-        cekResponse.setSimpleSpeechText('주사위 놀이 익스텐션을 종료합니다.');;
+        cekResponse.setSimpleSpeechText('주사위 놀이 익스텐션을 종료합니다.');
         cekResponse.clearMultiturn()
     }
 }
@@ -234,11 +235,12 @@ const clovaReq = function (httpReq, httpRes, next) {
             console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`);
             return httpRes.send(cekResponse);
         });
-    }else{
+    } else {
         console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`);
         return httpRes.send(cekResponse);
     }
     myKey = "";
-};;
+};
+;
 
 module.exports = clovaReq;
