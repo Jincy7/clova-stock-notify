@@ -3,7 +3,7 @@ const _ = require('lodash');
 const request = require('request');
 const {DOMAIN} = require('../config');
 
-const stockSearchUrl = "https://7vudjag5n8.execute-api.ap-northeast-2.amazonaws.com/v1/stocks";
+const stockSearchUrl = "https://jdig8qercg.execute-api.ap-northeast-2.amazonaws.com/v1/stocks";
 
 let myKey = "";
 
@@ -137,18 +137,13 @@ class CEKRequest {
                     });
                 }
                 console.log(searchKey);
-                /* TODO dev Blueprint
-                const stockResult = searchOnWeb(searchKey); 받은 주식값으로 검색 함수에 넣어서 값 반환 받기
-                결과 나오면 appendSpeechText 로 아래 resultText 처럼 함수 하나 만들어서 클로바로 출력하고
-                다이나모 디비에 저장!
-*/
                 break;
             case 'AddCompanyIntent':
                 console.log('AddCompanyIntent ! ');
                 break;
             case 'ThrowDiceIntent':
             default:
-                cekResponse.appendSpeechText('그건 제가 할 수 없는 일이에요.');
+                cekResponse.appendSpeechText('죄송해요.. 그건 제가 할 수 없는 일이에요.');
                 break
 
         }
@@ -233,6 +228,6 @@ const clovaReq = function (httpReq, httpRes, next) {
     }
     myKey = "";
 };
-;
+
 
 module.exports = clovaReq;
