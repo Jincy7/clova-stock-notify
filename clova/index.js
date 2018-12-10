@@ -218,7 +218,7 @@ const clovaReq = function (httpReq, httpRes, next) {
     cekRequest.do(cekResponse);
     if (myKey.length != 0) {
         getStock(myKey).then(function (stockData) {
-            cekResponse.appendSpeechText("요청하신 주식은" + stockData + "입니다.");
+            cekResponse.appendSpeechText(stockData);
             console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`);
             return httpRes.send(cekResponse);
         });
