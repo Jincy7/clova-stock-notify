@@ -148,15 +148,7 @@ class CEKRequest {
                 break;
             case 'ThrowDiceIntent':
             default:
-                let diceCount = 1;
-                cekResponse.appendSpeechText(`주사위를 ${diceCount}개 던집니다.`);
-                cekResponse.appendSpeechText({
-                    lang: 'ko',
-                    type: 'URL',
-                    value: `${DOMAIN}/rolling_dice_sound.mp3`,
-                });
-                const throwResult = throwDice(diceCount);
-                cekResponse.appendSpeechText(resultText(throwResult));
+                cekResponse.appendSpeechText('그건 제가 할 수 없는 일이에요.');
                 break
 
         }
@@ -168,7 +160,7 @@ class CEKRequest {
 
     sessionEndedRequest(cekResponse) {
         console.log('sessionEndedRequest');
-        cekResponse.setSimpleSpeechText('주사위 놀이 익스텐션을 종료합니다.');
+        cekResponse.setSimpleSpeechText('최신 기술 프로젝트의 주식알리미를 종료합니다.');
         cekResponse.clearMultiturn()
     }
 }
