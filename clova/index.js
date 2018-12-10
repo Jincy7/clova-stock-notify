@@ -45,16 +45,16 @@ function getStock(stockName) {
 }
 
 function throwDice(diceCount) {
-    const results = []
-    let midText = ''
-    let resultText = ''
-    let sum = 0
-    console.log(`throw ${diceCount} times`)
+    const results = [];
+    let midText = '';
+    let resultText = '';
+    let sum = 0;
+    console.log(`throw ${diceCount} times`);
     for (let i = 0; i < diceCount; i++) {
-        const rand = Math.floor(Math.random() * 6) + 1
-        console.log(`${i + 1} time: ${rand}`)
-        results.push(rand)
-        sum += rand
+        const rand = Math.floor(Math.random() * 6) + 1;
+        console.log(`${i + 1} time: ${rand}`);
+        results.push(rand);
+        sum += rand;
         midText += `${rand}, `
     }
 
@@ -64,25 +64,25 @@ function throwDice(diceCount) {
 
 class CEKRequest {
     constructor(httpReq) {
-        this.request = httpReq.body.request
-        this.context = httpReq.body.context
-        this.session = httpReq.body.session
+        this.request = httpReq.body.request;
+        this.context = httpReq.body.context;
+        this.session = httpReq.body.session;
         console.log(`CEK Request: ${JSON.stringify(this.context)}, ${JSON.stringify(this.session)}`)
     }
 
     do(cekResponse) {
         switch (this.request.type) {
             case 'LaunchRequest':
-                return this.launchRequest(cekResponse)
+                return this.launchRequest(cekResponse);
             case 'IntentRequest':
-                return this.intentRequest(cekResponse)
-            case 'SessionEndedRequest':
+                return this.intentRequest(cekResponse);
+            case 'SessionEndedRequest':;
                 return this.sessionEndedRequest(cekResponse)
         }
     }
 
     launchRequest(cekResponse) {
-        console.log('launchRequest')
+        console.log('launchRequest');
         cekResponse.setSimpleSpeechText('안녕하세요. 경희대 최신기술 프로젝트 F조의 주식 알리미입니다.')
         /*
       cekResponse.setMultiturn({
@@ -92,10 +92,10 @@ class CEKRequest {
     }
 
     intentRequest(cekResponse) {
-        console.log('intentRequest')
-        console.dir(this.request)
-        const intent = this.request.intent.name
-        const slots = this.request.intent.slots
+        console.log('intentRequest');
+        console.dir(this.request);
+        const intent = this.request.intent.name;
+        const slots = this.request.intent.slots;
 
         switch (intent) {
             case 'searchIntent':
@@ -130,10 +130,10 @@ class CEKRequest {
                     */
                 } else {
                     // 슬롯에 아무것도 없는 경우이므로 multiturn 응답을 통해 사용자에게 다시 회사명을 말해달라고 요청
-                    // cekResponse.setSimpleSpeechText('죄송해요, 회사를 찾지 못했어요. 앞으로 서비스해 드리기 위해 회사명을 다시 한번만 말해주세요.')
-                    // cekResponse.setMultiturn({
-                    //  intent: 'AddCompanyIntent',
-                    // });
+                    cekResponse.setSimpleSpeechText('죄송해요, 회사를 찾지 못했어요. 앞으로 서비스해 드리기 위해 회사명을 다시 한번만 말해주세요.')
+                    cekResponse.setMultiturn({
+                     intent: 'AddCompanyIntent',
+                    });
                 }
                 console.log(searchKey);
                 /* TODO dev Blueprint
@@ -142,19 +142,20 @@ class CEKRequest {
                 다이나모 디비에 저장!
 */
                 break;
-            case 'ResponseIntent':
+            case 'AddCompanyIntent':
+                console.log('AddCompanyIntent ! ');
                 break;
             case 'ThrowDiceIntent':
             default:
-                let diceCount = 1
-                cekResponse.appendSpeechText(`주사위를 ${diceCount}개 던집니다.`)
+                let diceCount = 1;
+                cekResponse.appendSpeechText(`주사위를 ${diceCount}개 던집니다.`);
                 cekResponse.appendSpeechText({
                     lang: 'ko',
                     type: 'URL',
                     value: `${DOMAIN}/rolling_dice_sound.mp3`,
-                })
-                const throwResult = throwDice(diceCount)
-                cekResponse.appendSpeechText(resultText(throwResult))
+                });
+                const throwResult = throwDice(diceCount);
+                cekResponse.appendSpeechText(resultText(throwResult));
                 break
 
         }
@@ -165,8 +166,8 @@ class CEKRequest {
     }
 
     sessionEndedRequest(cekResponse) {
-        console.log('sessionEndedRequest')
-        cekResponse.setSimpleSpeechText('주사위 놀이 익스텐션을 종료합니다.')
+        console.log('sessionEndedRequest');
+        cekResponse.setSimpleSpeechText('주사위 놀이 익스텐션을 종료합니다.');;
         cekResponse.clearMultiturn()
     }
 }
@@ -224,22 +225,20 @@ class CEKResponse {
 }
 
 const clovaReq = function (httpReq, httpRes, next) {
-    cekResponse = new CEKResponse()
-    cekRequest = new CEKRequest(httpReq)
-    cekRequest.do(cekResponse)
+    cekResponse = new CEKResponse();
+    cekRequest = new CEKRequest(httpReq);
+    cekRequest.do(cekResponse);
     if (myKey.length != 0) {
-        console.log(myKey);
         getStock(myKey).then(function (stockData) {
             cekResponse.appendSpeechText("요청하신 주식은" + stockData + "입니다.");
-            console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`)
-            return httpRes.send(cekResponse)
+            console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`);
+            return httpRes.send(cekResponse);
         });
     }else{
-        console.log(myKey);
-        console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`)
-        return httpRes.send(cekResponse)
+        console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`);
+        return httpRes.send(cekResponse);
     }
     myKey = "";
-};
+};;
 
 module.exports = clovaReq;
