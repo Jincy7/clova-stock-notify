@@ -4,6 +4,7 @@ const request = require('request');
 const {DOMAIN} = require('../config');
 
 const stockSearchUrl = "https://jdig8qercg.execute-api.ap-northeast-2.amazonaws.com/v1/stocks";
+const stockAddUrl = "https://7vudjag5n8.execute-api.ap-northeast-2.amazonaws.com/v1/addstocks";
 
 let myKey = "";
 
@@ -39,6 +40,22 @@ function getStock(stockName) {
             }
             let result = JSON.parse(body).stockID;
             console.log('Request Success! Server responded with:', result);
+            resolve(result);
+        });
+    });
+}
+
+function putStock(stockName) {
+    return new Promise(function (resolve) {
+        request.post({
+            url: stockAddUrl,
+            form: JSON.stringify({stockID: stockName})
+        }, function (err, httpResponse, body) {
+            if (err) {
+                return console.error('Request failed:', err);
+            }
+            let result = JSON.parse(body).stockID;
+            console.log('Request Success! Add new stock to DynamoDB: ',stockName );
             resolve(result);
         });
     });
@@ -217,6 +234,7 @@ const clovaReq = function (httpReq, httpRes, next) {
     cekRequest = new CEKRequest(httpReq);
     cekRequest.do(cekResponse);
     if (myKey.length != 0) {
+        putStock(myKey);
         getStock(myKey).then(function (stockData) {
             cekResponse.appendSpeechText(stockData);
             console.log(`CEKResponse: ${JSON.stringify(cekResponse)}`);
